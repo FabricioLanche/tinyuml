@@ -508,9 +508,9 @@ public class AppFrame extends JFrame
     JFileChooser fileChooser = new JFileChooser();
     fileChooser.setDialogTitle(getResourceString("dialog.exportgfx.title"));
     FileNameExtensionFilter svgFilter = new FileNameExtensionFilter(
-      "Scalable Vector Graphics file (*.svg)", "svg");
+            "Scalable Vector Graphics file (*.svg)", "svg");
     FileNameExtensionFilter pngFilter = new FileNameExtensionFilter(
-      "Portable Network Graphics file (*.png)", "png");
+            "Portable Network Graphics file (*.png)", "png");
     fileChooser.addChoosableFileFilter(svgFilter);
     fileChooser.addChoosableFileFilter(pngFilter);
     fileChooser.setAcceptAllFileFilterUsed(false);
@@ -521,8 +521,8 @@ public class AppFrame extends JFrame
           exporter.writeSVG(getCurrentEditor(), fileChooser.getSelectedFile());
         } catch (IOException ex) {
           JOptionPane.showMessageDialog(this, ex.getMessage(),
-            getResourceString("error.exportgfx.title"),
-            JOptionPane.ERROR_MESSAGE);
+                  getResourceString("error.exportgfx.title"),
+                  JOptionPane.ERROR_MESSAGE);
         }
       } else if (fileChooser.getFileFilter() == pngFilter) {
         try {
@@ -530,8 +530,8 @@ public class AppFrame extends JFrame
           exporter.writePNG(getCurrentEditor(), fileChooser.getSelectedFile());
         } catch (IOException ex) {
           JOptionPane.showMessageDialog(this, ex.getMessage(),
-            getResourceString("error.exportgfx.title"),
-            JOptionPane.ERROR_MESSAGE);
+                  getResourceString("error.exportgfx.title"),
+                  JOptionPane.ERROR_MESSAGE);
         }
       }
     }
@@ -543,7 +543,7 @@ public class AppFrame extends JFrame
    */
   private FileNameExtensionFilter createModelFileFilter() {
     return new FileNameExtensionFilter(
-      "TinyUML serialized model file (*.tsm)", "tsm");
+            "TinyUML serialized model file (*.tsm)", "tsm");
   }
 
   /**
@@ -561,10 +561,11 @@ public class AppFrame extends JFrame
           tabbedPane.removeAll();
           createEditor((StructureDiagram) umlModel.getDiagrams().get(0));
           updateFrameTitle();
+          updateItemCount();
         } catch (IOException ex) {
           JOptionPane.showMessageDialog(this, ex.getMessage(),
-            getResourceString("error.readfile.title"),
-            JOptionPane.ERROR_MESSAGE);
+                  getResourceString("error.readfile.title"),
+                  JOptionPane.ERROR_MESSAGE);
         }
       }
     }
@@ -577,9 +578,9 @@ public class AppFrame extends JFrame
   private boolean canOpen() {
     if (currentEditor.canUndo()) {
       return JOptionPane.showConfirmDialog(this,
-        ApplicationResources.getInstance().getString("confirm.open.message"),
-        ApplicationResources.getInstance().getString("confirm.open.title"),
-        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
+              ApplicationResources.getInstance().getString("confirm.open.message"),
+              ApplicationResources.getInstance().getString("confirm.open.title"),
+              JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION;
     }
     return true;
   }
@@ -623,7 +624,7 @@ public class AppFrame extends JFrame
     } catch (IOException ex) {
       ex.printStackTrace();
       JOptionPane.showMessageDialog(this, ex.getMessage(),
-        getResourceString("error.savefile.title"), JOptionPane.ERROR_MESSAGE);
+              getResourceString("error.savefile.title"), JOptionPane.ERROR_MESSAGE);
     }
     return result;
   }
@@ -634,19 +635,19 @@ public class AppFrame extends JFrame
   private void updateFrameTitle() {
     if (currentFile != null) {
       setTitle(ApplicationResources.getInstance()
-        .getString("application.title") + " [" + currentFile.getName() + "]");
+              .getString("application.title") + " [" + currentFile.getName() + "]");
     } else {
       setTitle(ApplicationResources.getInstance()
-        .getString("application.title"));
+              .getString("application.title"));
     }
   }
   /**
    * cut the current selection.
    */
   public void cut(){
-	  copy();
-	  delete();
-	  selectionStateChanged();
+    copy();
+    delete();
+    selectionStateChanged();
   }
   /**
    * Keeps track of the last copied elements (the ones selected when
@@ -654,20 +655,20 @@ public class AppFrame extends JFrame
    * Creado para cumplir con la solicitud E de la tarea.
    */
   public void copy(){
-	  boolean hasSelection = getCurrentEditor().getSelectedElements().size() > 0;
+    boolean hasSelection = getCurrentEditor().getSelectedElements().size() > 0;
 
-	  if(hasSelection)
-	    lastCopiedElements = getCurrentEditor().getSelectedElements();
+    if(hasSelection)
+      lastCopiedElements = getCurrentEditor().getSelectedElements();
 
-	  //adicionalmente, hay que habilitar el botón PASTE!
-	  menumanager.enableMenuItem("PASTE", hasSelection);
-	  toolbarmanager.enableButton("PASTE", hasSelection);
+    //adicionalmente, hay que habilitar el botón PASTE!
+    menumanager.enableMenuItem("PASTE", hasSelection);
+    toolbarmanager.enableButton("PASTE", hasSelection);
   }
   /**
    * paste the current selection.
    */
   public void paste(){
-		getCurrentEditor().pasteElement(lastCopiedElements);
+    getCurrentEditor().pasteElement(lastCopiedElements);
   }
   /**
    * Deletes the current selection.
@@ -681,7 +682,7 @@ public class AppFrame extends JFrame
    */
   public void about() {
     JOptionPane.showMessageDialog(this, getResourceString("dialog.about.text"),
-      getResourceString("dialog.about.title"), JOptionPane.INFORMATION_MESSAGE);
+            getResourceString("dialog.about.title"), JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
@@ -693,9 +694,9 @@ public class AppFrame extends JFrame
       Desktop.getDesktop().browse(helpUri);
     } catch (IOException ex) {
       JOptionPane.showMessageDialog(this,
-        getResourceString("error.nohelp.message"),
-        getResourceString("error.nohelp.title"),
-        JOptionPane.ERROR_MESSAGE);
+              getResourceString("error.nohelp.message"),
+              getResourceString("error.nohelp.title"),
+              JOptionPane.ERROR_MESSAGE);
     } catch (URISyntaxException ignore) {
       ignore.printStackTrace();
     }
